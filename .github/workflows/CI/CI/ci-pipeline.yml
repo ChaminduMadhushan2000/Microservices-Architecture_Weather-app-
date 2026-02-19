@@ -1,0 +1,25 @@
+name: Microservices CI Pipeline
+
+# Trigger the workflow when code is pushed to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # This is the virtual machine GitHub provides
+
+    steps:
+    # Step 1: Download your code onto the GitHub runner
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # Step 2: Build all Docker containers to ensure there are no errors
+    - name: Build Docker Compose Services
+      run: docker-compose build
+
+    # Step 3: Do a "dry run" to ensure the containers can actually start up
+    - name: Test Infrastructure Startup
+      run: docker-compose up -d
