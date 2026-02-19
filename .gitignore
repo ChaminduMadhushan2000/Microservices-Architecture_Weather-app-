@@ -1,0 +1,10 @@
+# Ignore Node dependencies
+node_modules/
+*/node_modules/
+
+# Ignore React build folders
+dist/
+*/dist/
+
+# Ignore environment variables
+.env
