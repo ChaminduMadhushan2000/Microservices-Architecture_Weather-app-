@@ -8,3 +8,13 @@ dist/
 
 # Ignore environment variables
 .env
+
+# Terraform ignores
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+
+# Security ignores
+terraform/weather_key
+terraform/weather_key.pub
