@@ -50,15 +50,7 @@ resource "aws_security_group" "weather_sg" {
   }
 
   ingress {
-    description = "Frontend"
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Backend services"
+    description = "App via API Gateway"
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
@@ -102,19 +94,32 @@ resource "aws_instance" "weather_server" {
   user_data = <<-EOF
               #!/bin/bash
               set -euo pipefail
-              
-              # Install prerequisites
+              exec > /var/log/user-data.log 2>&1
+
+              # Install Docker via official repo
               apt-get update -y
-              apt-get install -y docker.io docker-compose-v2 git
+              apt-get install -y ca-certificates curl gnupg lsb-release git
+
+              install -m 0755 -d /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+                gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              chmod a+r /etc/apt/keyrings/docker.gpg
+
+              echo \
+                "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+                https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+                tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+              apt-get update -y
+              apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
               systemctl enable --now docker
               usermod -aG docker ubuntu
 
-              # Clone your GitHub repository
+              # Clone repository and start the app
               cd /home/ubuntu
               git clone https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git weather-app
               chown -R ubuntu:ubuntu /home/ubuntu/weather-app
 
-              # Start the application
               cd weather-app
               docker compose up --build -d
               EOF

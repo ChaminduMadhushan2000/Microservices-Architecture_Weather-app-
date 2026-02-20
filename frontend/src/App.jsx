@@ -55,11 +55,11 @@ function App() {
     setCardVisible(false);
 
     try {
-      const locRes = await fetch(`http://localhost:8080/api/location?city=${q}`);
+      const locRes = await fetch(`/api/location?city=${q}`);
       if (!locRes.ok) throw new Error(`City "${q}" not found`);
       const loc = await locRes.json();
 
-      const wxRes = await fetch(`http://localhost:8080/api/weather?lat=${loc.lat}&lon=${loc.lon}`);
+      const wxRes = await fetch(`/api/weather?lat=${loc.lat}&lon=${loc.lon}`);
       const wx = await wxRes.json();
 
       setWeather(wx);

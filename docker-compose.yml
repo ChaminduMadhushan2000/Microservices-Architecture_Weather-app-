@@ -1,19 +1,29 @@
-version: '3.8'
-
 services:
   location-service:
     build: ./location-service
-    ports:
-      - "3001:3001"
+    expose:
+      - "3001"
     networks:
       - weather-net
+    restart: unless-stopped
 
   weather-service:
     build: ./weather-service
-    ports:
-      - "3002:3002"
+    expose:
+      - "3002"
     networks:
       - weather-net
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    expose:
+      - "3000"
+    depends_on:
+      - api-gateway
+    networks:
+      - weather-net
+    restart: unless-stopped
 
   api-gateway:
     image: nginx:alpine
@@ -26,15 +36,7 @@ services:
       - weather-service
     networks:
       - weather-net
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - api-gateway
-    networks:
-      - weather-net
+    restart: unless-stopped
 
 networks:
   weather-net:
