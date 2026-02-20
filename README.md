@@ -2,8 +2,6 @@
 
 A fully containerized, microservices-based weather application deployed on AWS. This project demonstrates modern Cloud Infrastructure, DevOps automation, and secure networking practices using Docker, Terraform, and GitHub Actions.
 
-
-
 ## 🏗️ Architecture Overview
 
 The platform is designed with isolated services communicating through a centralized Nginx API Gateway, eliminating cross-origin resource sharing (CORS) complexity and direct client-to-backend coupling.
@@ -37,44 +35,34 @@ The platform is designed with isolated services communicating through a centrali
 * Node.js v18+ (for local testing without containers).
 
 ### Running the Application
+
 1. Clone the repository:
    ```bash
    git clone [https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git](https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git)
    cd Microservices-Architecture_Weather-app-
-Build and start the containers:
+   ```
 
-Bash
-docker compose up --build
-Access the application in your browser:
+2. Build and start the containers:
+   ```bash
+   docker compose up --build
+   ```
 
-Frontend Interface: http://localhost (or http://localhost:8080 depending on your host port mapping)
+3. Access the application in your browser:
+   * **Frontend Interface:** `http://localhost` (or `http://localhost:8080` depending on your host port mapping)
+   * **Location API Test:** `http://localhost/api/location?city=London`
+   * **Weather API Test:** `http://localhost/api/weather?lat=51.5&lon=-0.1`
 
-Location API Test: http://localhost/api/location?city=London
+## ☁️ Cloud Deployment (Terraform)
 
-Weather API Test: http://localhost/api/weather?lat=51.5&lon=-0.1
-
-☁️ Cloud Deployment (Terraform)
 The infrastructure is fully defined as code. To provision the AWS environment:
 
-Navigate to the Terraform directory:
+1. Navigate to the Terraform directory:
+   ```bash
+   cd terraform
+   ```
 
-Bash
-cd terraform
-Initialize and apply the configuration:
-
-Bash
-terraform init
-terraform apply
-
-Notice how every single ` ```bash ` has a matching ` ``` ` right underneath it? That is the secret to clean GitHub documentation. 
-
-Once you paste that in and save it, your repo is 100% complete and ready for recruiters. 
-
-Would you like to move on to the actual code now and tackle adding **Redis caching** t
-
-☁️ Cloud Deployment (Terraform)
-The infrastructure is fully defined as code. To provision the AWS environment:
-
-1. Navigate to the Terraform directory:   cd terraform
-2. Initialize and apply the configuration:   terraform init
-                                             terraform apply
+2. Initialize and apply the configuration:
+   ```bash
+   terraform init
+   terraform apply
+   ```
