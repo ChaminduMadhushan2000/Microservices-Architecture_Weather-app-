@@ -41,3 +41,22 @@ The platform is designed with isolated services communicating through a centrali
    ```bash
    git clone [https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git](https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git)
    cd Microservices-Architecture_Weather-app-
+
+2. Build and start the containers: docker compose up --build
+   
+3. Access the application in your browser:
+
+   Frontend Interface: http://localhost (or http://localhost:8080 depending on your host port mapping)
+
+   Location API Test: http://localhost/api/location?city=London
+
+   Weather API Test: http://localhost/api/weather?lat=51.5&lon=-0.1
+
+
+
+☁️ Cloud Deployment (Terraform)
+The infrastructure is fully defined as code. To provision the AWS environment:
+
+1. Navigate to the Terraform directory:   cd terraform
+2. Initialize and apply the configuration:   terraform init
+                                             terraform apply
