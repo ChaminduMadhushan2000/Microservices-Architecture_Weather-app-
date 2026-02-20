@@ -41,18 +41,36 @@ The platform is designed with isolated services communicating through a centrali
    ```bash
    git clone [https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git](https://github.com/ChaminduMadhushan2000/Microservices-Architecture_Weather-app-.git)
    cd Microservices-Architecture_Weather-app-
+Build and start the containers:
 
-2. Build and start the containers: docker compose up --build
-   
-3. Access the application in your browser:
+Bash
+docker compose up --build
+Access the application in your browser:
 
-   Frontend Interface: http://localhost (or http://localhost:8080 depending on your host port mapping)
+Frontend Interface: http://localhost (or http://localhost:8080 depending on your host port mapping)
 
-   Location API Test: http://localhost/api/location?city=London
+Location API Test: http://localhost/api/location?city=London
 
-   Weather API Test: http://localhost/api/weather?lat=51.5&lon=-0.1
+Weather API Test: http://localhost/api/weather?lat=51.5&lon=-0.1
 
+☁️ Cloud Deployment (Terraform)
+The infrastructure is fully defined as code. To provision the AWS environment:
 
+Navigate to the Terraform directory:
+
+Bash
+cd terraform
+Initialize and apply the configuration:
+
+Bash
+terraform init
+terraform apply
+
+Notice how every single ` ```bash ` has a matching ` ``` ` right underneath it? That is the secret to clean GitHub documentation. 
+
+Once you paste that in and save it, your repo is 100% complete and ready for recruiters. 
+
+Would you like to move on to the actual code now and tackle adding **Redis caching** t
 
 ☁️ Cloud Deployment (Terraform)
 The infrastructure is fully defined as code. To provision the AWS environment:
