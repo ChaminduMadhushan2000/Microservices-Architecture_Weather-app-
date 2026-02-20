@@ -27,6 +27,14 @@ services:
     networks:
       - weather-net
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway
+    networks:
+      - weather-net
+
 networks:
   weather-net:
-    driver: bridge
